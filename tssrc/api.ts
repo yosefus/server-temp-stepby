@@ -3,22 +3,23 @@ import serverless from "serverless-http"
 import { projects } from "./fakeData/fakeProjects"
 import { user } from "./fakeData/fakeUser"
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const
+   swaggerUi = require('swagger-ui-express'),
+   swaggerFile = require('./swagger_output.json')
+
 
 const
    app: Application = express(),
    router = Router()
 
-
+require("./swagger")
 
 app.use(express.json())
 // app.use(require("cors")())
 app.use(express.urlencoded({ extended: false }))
 
 
-router.use('/docs', swaggerUi.serve);
-router.get('/docs', swaggerUi.setup(swaggerDocument));
+router.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 router.all("/test", (req: Request, res: Response) => {
    res.send("success")

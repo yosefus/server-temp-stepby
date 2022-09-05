@@ -30,14 +30,13 @@ const express_1 = __importStar(require("express"));
 const serverless_http_1 = __importDefault(require("serverless-http"));
 const fakeProjects_1 = require("./fakeData/fakeProjects");
 const fakeUser_1 = require("./fakeData/fakeUser");
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require('swagger-ui-express'), swaggerFile = require('./swagger_output.json');
 const app = (0, express_1.default)(), router = (0, express_1.Router)();
+require("./swagger");
 app.use(express_1.default.json());
 // app.use(require("cors")())
 app.use(express_1.default.urlencoded({ extended: false }));
-router.use('/docs', swaggerUi.serve);
-router.get('/docs', swaggerUi.setup(swaggerDocument));
+router.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 router.all("/test", (req, res) => {
     res.send("success");
 });
