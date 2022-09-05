@@ -59,6 +59,7 @@ router.put("/project/:id", (req: Request, res: Response) => {
    res.send(found)
 })
 
+router.use("*", (req: Request, res: Response) => res.send("some"))
 
 app.use("/.netlify/functions/api", router)
 

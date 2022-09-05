@@ -66,5 +66,6 @@ router.put("/project/:id", (req, res) => {
     });
     res.send(found);
 });
+router.use("*", (req, res) => res.send("some"));
 app.use("/.netlify/functions/api", router);
 module.exports.handler = (0, serverless_http_1.default)(app);
